@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Card from './Card';
 import './List.css';
 
+class List extends Component {
 
-function List(props) {
+    render() {
 
-    return (
-        <section className="List">
-            <header className="List-header">
-                <h2>{props.header}</h2>
-            </header>
-            <div className="List-cards">
-                {props.cards.map(x => <Card title={x.title} content={x.content}></Card>)}
-            </div>
-        </section>
-    )
+        return (
+            <section className="List">
+                <header className="List-header">
+                    <h2>{this.props.header}</h2>
+                </header>
+                <div className="List-cards">
 
+                    {this.props.cards.map(x => <Card title={x.title} content={x.content} id={x.id} button={this.props.button}></Card>)}
+
+                </div>
+            </section>
+        )
+
+
+    }
 
 }
 
