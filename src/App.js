@@ -12,6 +12,18 @@ class App extends Component {
 
   }
 
+  newRandomCard = () => {
+
+    const id = Math.random().toString(36).substring(2, 4)
+      + Math.random().toString(36).substring(2, 4);
+
+    return {
+      id,
+      title: `Random Card ${id}`,
+      content: 'lorem ipsum',
+    }
+  }
+
   buttonClickHandle = (idToRemove) => {
 
     console.log('I was clicked');
@@ -35,6 +47,35 @@ class App extends Component {
 
   }
 
+  buttonClickToAdd = (idToAdd) => {
+
+    console.log('I was clicked');
+    let randomCard = this.newRandomCard()
+
+    this.state.store.allCards[randomCard.id] = randomCard;
+
+    let newList =(this.state.store.lists.map(list => {
+      
+      if(list.id === idToAdd){
+      
+      list.cardIds.push(randomCard.id);
+      
+      return list;
+      }
+
+      else return list;
+    }));
+
+
+    this.state.store.lists = newList;
+
+    this.setState({
+      store : this.state.store
+    }
+    )
+    
+  }
+
 
 
   render() {
@@ -47,7 +88,7 @@ class App extends Component {
         </header>
         <div class="App-list">
 
-          {this.state.store.lists.map(x => <List header={x.header} cards={x.cardIds.map(id => this.state.store.allCards[id])} button={this.buttonClickHandle} ></List>)}
+          {this.state.store.lists.map(x => <List header={x.header} addButton={this.buttonClickToAdd} id={x.id} cards={x.cardIds.map(id => this.state.store.allCards[id])} button={this.buttonClickHandle} ></List>)}
 
         </div>
       </main>

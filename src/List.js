@@ -12,8 +12,8 @@ class List extends Component {
                     <h2>{this.props.header}</h2>
                 </header>
                 <div className="List-cards">
-
-                    {this.props.cards.map(x => <Card title={x.title} content={x.content} id={x.id} button={this.props.button}></Card>)}
+                    {<button type="button" onClick={() => this.props.addButton(this.props.id)}>Add Random Card</button>}
+                    {this.props.cards.map(x => <Card title={x.title} content={x.content} id={x.id} button={this.props.button} addButton={this.props.addButton}></Card>)}
 
                 </div>
             </section>
